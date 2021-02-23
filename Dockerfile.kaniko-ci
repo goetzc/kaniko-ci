@@ -1,0 +1,17 @@
+FROM gcr.io/kaniko-project/executor:v1.5.1 as kaniko
+
+FROM alpine:3.13
+
+ENV DOCKER_CONFIG=/kaniko/.docker
+ENV PATH=/kaniko:$PATH
+ENV SSL_CERT_DIR=/kaniko/ssl/certs
+
+RUN mkdir -p $SSL_CERT_DIR ~/.ssh
+
+RUN apk add --no-cache \
+    bash \
+    git \
+    openssh-client
+
+COPY --from=kaniko /kaniko/executor /kaniko/
+COPY --from=kaniko /kaniko/.docker/ /kaniko/.docker/
