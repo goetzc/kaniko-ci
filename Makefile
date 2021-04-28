@@ -1,6 +1,6 @@
 VERSION = $(shell make version)
-DOCKER_FILE = "Dockerfile.kaniko-ci"
-DOCKER_REPOSITORY = "goetzc/kaniko-ci"
+DOCKER_FILE = Dockerfile.kaniko-ci
+DOCKER_REPOSITORY = goetzc/kaniko-ci
 DOCKER_TAG_LATEST = ${DOCKER_REPOSITORY}:latest
 DOCKER_TAG_VERSION = ${DOCKER_REPOSITORY}:${VERSION}
 
@@ -11,15 +11,13 @@ all: build git push
 build:
 	docker build . \
 		--file ${DOCKER_FILE} \
-		--tag ${DOCKER_TAG_LATEST} \
-		--tag ${DOCKER_TAG_VERSION}
+		--tag ${DOCKER_TAG_VERSION} \
+		--tag ${DOCKER_TAG_LATEST}
 
 .PHONY: push
 push:
-	docker push . \
-		--file ${DOCKER_FILE} \
-		--tag ${DOCKER_TAG_LATEST} \
-		--tag ${DOCKER_TAG_VERSION}
+		 docker push ${DOCKER_TAG_VERSION} \
+	&& docker push ${DOCKER_TAG_LATEST}
 
 .PHONY: git
 git: git_add git_commit
