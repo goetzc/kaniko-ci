@@ -31,7 +31,11 @@ git_commit:
 	git commit -m "Update to ${VERSION}"
 
 .PHONY: version
-version: VERSION = $(shell head -n 1 ${DOCKER_FILE} | cut -d ':' -f 2 | awk '{print $$1}' | tr -d 'v')
+version: VERSION = $(shell cat ${DOCKER_FILE} | grep -vE '^#|^ #' | grep '^FROM' | head -n 1 | cut -d ':' -f 2 | awk '{print $$1}' | tr -d 'v')
 version:
 	@echo ${VERSION}
 
+.PHONY: open
+open: URL = "$(shell grep 'kaniko-ci' ${DOCKER_FILE} | cut -d '#' -f 2 | xargs)"
+open:
+	xdg-open $(URL)
