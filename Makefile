@@ -1,3 +1,6 @@
+.DEFAULT_GOAL := version
+SHELL = bash
+
 VERSION = $(shell make version)
 DOCKER_FILE = Dockerfile.kaniko-ci
 DOCKER_REPOSITORY = goetzc/kaniko-ci
