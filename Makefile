@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := version
 SHELL = bash
 
-VERSION = $(shell make version)
+VERSION = $(shell make --quiet version)
 DOCKER_FILE = Dockerfile.kaniko-ci
 DOCKER_REPOSITORY = goetzc/kaniko-ci
 DOCKER_TAG_LATEST = ${DOCKER_REPOSITORY}:latest
@@ -34,7 +34,7 @@ git_commit:
 	git commit -m "Update to ${VERSION}"
 
 .PHONY: version
-version: VERSION = $(shell cat ${DOCKER_FILE} | grep -vE '^#|^ #' | grep '^FROM' | head -n 1 | cut -d ':' -f 2 | awk '{print $$1}' | tr -d 'v')
+version: VERSION = $(shell cat ${DOCKER_FILE} | grep -vE '^#|^ #' | grep '^FROM' | grep kaniko | cut -d ':' -f 2 | awk '{print $$1}' | tr -d 'v')
 version:
 	@echo ${VERSION}
 
