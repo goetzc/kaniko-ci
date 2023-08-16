@@ -1,7 +1,7 @@
 # https://hub.docker.com/r/goetzc/kaniko-ci
 # https://github.com/GoogleContainerTools/kaniko
 
-FROM gcr.io/kaniko-project/executor:v1.13.0 as kaniko
+FROM gcr.io/kaniko-project/executor:v1.14.0 as kaniko
 
 FROM alpine:3.15
 
