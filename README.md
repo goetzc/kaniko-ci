@@ -12,6 +12,16 @@ Minimal environment with Kaniko executor:
 - Based on latest Alpine stable image
 - Includes Bash, Git and OpenSSH client
 
+## Table of contents
+
+<!-- toc -->
+
+- [Example usage](#example-usage)
+  - [Build a container image](#build-a-container-image)
+- [Inspect the image](#inspect-the-image)
+
+<!-- tocstop -->
+
 ## Example usage
 
 ### Build a container image
@@ -27,7 +37,7 @@ echo "{\"auths\": {\"https://index.docker.io/v1/\": {\"auth\": \"$DOCKER_AUTH_TO
 executor --context /src/app/ --destination <container-registry>/<container-repository>:latest
 ```
 
-### Inspect the image
+## Inspect the image
 
 ```sh
 $ docker run --rm -it goetzc/kaniko-ci sh
