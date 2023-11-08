@@ -2,7 +2,7 @@
 SHELL = bash
 
 VERSION = $(shell make --quiet version)
-DOCKER_FILE = Dockerfile.kaniko-ci
+DOCKER_FILE = Dockerfile
 DOCKER_REPOSITORY = goetzc/kaniko-ci
 DOCKER_TAG_LATEST = ${DOCKER_REPOSITORY}:latest
 DOCKER_TAG_VERSION = ${DOCKER_REPOSITORY}:${VERSION}

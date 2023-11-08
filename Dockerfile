@@ -9,12 +9,14 @@ ENV DOCKER_CONFIG=/kaniko/.docker
 ENV PATH=/kaniko:$PATH
 ENV SSL_CERT_DIR=/kaniko/ssl/certs
 
-RUN mkdir -p $SSL_CERT_DIR ~/.ssh
-
+# hadolint ignore=DL3018
 RUN apk add --no-cache \
   bash \
   git \
   openssh-client
+
+# hadolint ignore=DL3059
+RUN mkdir -p $SSL_CERT_DIR ~/.ssh
 
 COPY --from=kaniko /kaniko/executor /kaniko/
 COPY --from=kaniko /kaniko/.docker/ /kaniko/.docker/
