@@ -13,6 +13,7 @@ all: build git push
 .PHONY: build
 build:
 	docker build . \
+		--platform linux/amd64 \
 		--file ${DOCKER_FILE} \
 		--tag ${DOCKER_TAG_VERSION} \
 		--tag ${DOCKER_TAG_LATEST}
@@ -41,4 +42,4 @@ version:
 .PHONY: open
 open: URL = "$(shell grep 'kaniko-ci' ${DOCKER_FILE} | cut -d '#' -f 2 | xargs)"
 open:
-	xdg-open $(URL)
+	open $(URL) | xdg-open $(URL)
