@@ -1,9 +1,9 @@
 # https://hub.docker.com/r/goetzc/kaniko-ci
 # https://github.com/GoogleContainerTools/kaniko
 
-FROM gcr.io/kaniko-project/executor:v1.23.2 as kaniko
+FROM gcr.io/kaniko-project/executor:v1.24.0 as kaniko
 
-FROM alpine:3.16
+FROM alpine:3.18
 
 ENV DOCKER_CONFIG=/kaniko/.docker
 ENV PATH=/kaniko:$PATH
